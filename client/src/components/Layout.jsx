@@ -1,16 +1,26 @@
-import React from 'react'
-import { Outlet } from "react-router-dom"
-import Header from './Header'
-import Footer from './Footer'
+// Layout.jsx
+import React, { useEffect, useState } from 'react';
+import { Outlet } from "react-router-dom";
+import Header from './Header';
+import Footer from './Footer';
 
 const Layout = () => {
-    return (
-        <>
-            <Header />
-            <Outlet />
-            <Footer />
-        </>
-    )
-}
+  const [userId, setUserId] = useState(localStorage.getItem("userId"));
 
-export default Layout
+  useEffect(() => {
+    const id = localStorage.getItem("userId");
+    if (id && !userId) {
+      window.location.reload(); 
+    }
+  }, [userId]);
+
+  return (
+    <>
+      <Header key={userId} />
+      <Outlet />
+      <Footer />
+    </>
+  );
+};
+
+export default Layout;
