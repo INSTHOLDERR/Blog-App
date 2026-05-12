@@ -104,69 +104,75 @@ export const getUser = async (req, res, next) => {
 
 
 
-
-
-
-
-
-
-
-
 export const changeAvatar = async (req, res, next) => {
-    try {
-        if (!req.files || !req.files.avatar) {
-            return next(new HttpError("Please choose an image.", 422));
-        }
-
-        const { avatar } = req.files;
-
-        if (avatar.size > 500000) {
-            return next(new HttpError("Profile picture too big. Should be less than 500KB.", 422));
-        }
-
-        const user = await User.findById(req.user.id);
-        if (!user) {
-            return next(new HttpError("User not found.", 404));
-        }
-
-        if (user.avatar) {
-            const oldAvatarPath = path.join(__dirname, '..', 'uploads', user.avatar);
-            fs.unlink(oldAvatarPath, (err) => {
-                if (err) {
-                    console.error(`Failed to delete old avatar: ${err.message}`);
-                }
-            });
-        }
-
-        const fileExtension = path.extname(avatar.name);
-        const newFilename = path.basename(avatar.name, fileExtension) + uuidv4() + fileExtension;
-
-        avatar.mv(path.join(__dirname, '..', 'uploads', newFilename), async (err) => {
-            if (err) {
-                console.error(`File upload failed: ${err.message}`);
-                return next(new HttpError("File upload failed.", 500));
-            }
-
-            try {
-                const updatedAvatar = await User.findByIdAndUpdate(req.user.id, { avatar: newFilename }, { new: true });
-
-                if (!updatedAvatar) {
-                    return next(new HttpError("Avatar couldn't be updated.", 422));
-                }
-
-                res.status(200).json(updatedAvatar);
-            } catch (dbError) {
-                console.error(`Database update failed: ${dbError.message}`);
-                return next(new HttpError("Database update failed.", 500));
-            }
-        });
-
-    } catch (error) {
-        console.error(`Unexpected error: ${error.message}`);
-        return next(new HttpError("An unexpected error occurred.", 500));
+  try {
+    // CHECK FILE
+    if (!req.files || !req.files.avatar) {
+      return next(new HttpError("Please choose an image.", 422));
     }
-};
 
+    const avatar = req.files.avatar;
+
+    // FILE SIZE CHECK
+    if (avatar.size > 5 * 1024 * 1024) {
+      return next(
+        new HttpError("Profile picture too big. Less than 5MB.", 422)
+      );
+    }
+
+    // FIND USER
+    const user = await User.findById(req.user.id);
+
+    if (!user) {
+      return next(new HttpError("User not found.", 404));
+    }
+
+    // DELETE OLD AVATAR
+    if (user.avatar) {
+      const oldAvatarPath = path.join(
+        __dirname,
+        "..",
+        "uploads",
+        user.avatar
+      );
+
+      if (fs.existsSync(oldAvatarPath)) {
+        fs.unlinkSync(oldAvatarPath);
+      }
+    }
+
+    // CREATE NEW FILE NAME
+    const fileExtension = path.extname(avatar.name);
+
+    const newFilename = `${uuidv4()}${fileExtension}`;
+
+    const uploadPath = path.join(
+      __dirname,
+      "..",
+      "uploads",
+      newFilename
+    );
+
+    // MOVE FILE
+    await avatar.mv(uploadPath);
+
+    // UPDATE DATABASE
+    const updatedUser = await User.findByIdAndUpdate(
+      req.user.id,
+      { avatar: newFilename },
+      { new: true }
+    );
+
+    res.status(200).json({
+      success: true,
+      user: updatedUser,
+    });
+
+  } catch (error) {
+    console.log(error);
+    return next(new HttpError(error.message || "Avatar upload failed", 500));
+  }
+};
 
 
 

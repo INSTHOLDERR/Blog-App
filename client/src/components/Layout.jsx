@@ -15,11 +15,13 @@ const Layout = () => {
   }, [userId]);
 
   return (
-    <>
+     <div className="app">
       <Header key={userId} />
-      <Outlet />
+       <main className="main-content">
+        <Outlet />
+      </main>
       <Footer />
-    </>
+    </div>
   );
 };
 

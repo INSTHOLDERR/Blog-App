@@ -1,50 +1,57 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
-import PostAuthor from './PostAuthor';
+// PostItem.jsx
 
-const PostItem = ({ postID, category, title, description, authorID, thumbnail }) => {
-  const stripHTML = (html) => html.replace(/<[^>]*>?/gm, '');
+import React from "react";
+import { Link } from "react-router-dom";
+import PostAuthor from "./PostAuthor";
+import "../csss/postitem.css"
+const PostItem = ({
+  postID,
+  category,
+  title,
+  description,
+  authorID,
+  thumbnail,
+}) => {
+  const stripHTML = (html) => html.replace(/<[^>]*>?/gm, "");
+
   const cleanDescription = stripHTML(description);
 
-  const shortDescription = cleanDescription.length > 145
-    ? cleanDescription.substr(0, 145) + '...'
-    : cleanDescription;
-  const postTitle = title && title.length > 30
-    ? title.substr(0, 30) + '...'
-    : title;
+  const shortDescription =
+    cleanDescription.length > 120
+      ? cleanDescription.substr(0, 120) + "..."
+      : cleanDescription;
 
-  const imageSrc = thumbnail.startsWith('http://localhost:5000/uploads/')
-    ? thumbnail
-    : `http://localhost:5000/uploads/${thumbnail}`;
+  const shortTitle =
+    title.length > 40 ? title.substr(0, 40) + "..." : title;
 
   return (
-    <article className="post">
-      <Link to={`/posts/${postID}`}>
-        <div className="post__thumbnail">
-          <img
-            src={imageSrc}
-            alt={title}
-            onError={(e) => {
-              e.target.onerror = null;
-              e.target.src = '/img/sample.jpg';
-            }}
-          />
-        </div>
+    <article className="post-card">
+      <Link to={`/posts/${postID}`} className="thumbnail-wrapper">
+        <img
+          src={thumbnail}
+          alt={title}
+          className="post-image"
+          onError={(e) => {
+            e.target.src = "/img/sample.jpg";
+          }}
+        />
       </Link>
 
-      <div className="post__content">
-        <Link to={`/posts/${postID}`}>
-          <h3>{postTitle}</h3>
-          <p>{shortDescription}</p>
+      <div className="post-content">
+        <div className="category-tag">{category}</div>
+
+        <Link to={`/posts/${postID}`} className="post-title-link">
+          <h2>{shortTitle}</h2>
         </Link>
 
-        <div className="post__footer">
+        <p className="post-description">{shortDescription}</p>
+
+        <div className="post-footer">
           <PostAuthor authorId={authorID} />
-          {category && (
-            <Link to={`/posts/categories/${category}`} className="btn category">
-              {category}
-            </Link>
-          )}
+
+          <Link to={`/posts/${postID}`} className="read-more-btn">
+            Read More
+          </Link>
         </div>
       </div>
     </article>

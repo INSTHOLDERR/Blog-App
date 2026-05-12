@@ -1,26 +1,27 @@
-// index.js or App.js
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import './index.css';
 
-import Layout from './components/Layout';
-import ErrorPage from './pages/ErrorPage';
+import Layout from './components/Layout.jsx';
+import ErrorPage from './pages/ErrorPage.jsx';
 import Home from './pages/Home.jsx';
-import PostDetail from './pages/PostDetail';
-import Register from './pages/Register';
-import Login from './pages/Login';
-import UserProfile from "./pages/UserProfile";
-import Authors from './pages/Authors';
-import CreatePost from './pages/CreatePost';
-import EditPost from './pages/EditPost';
-import CategoryPosts from './pages/CategoryPosts';
-import AuthorPost from './pages/AuthorPost';
-import Dashbord from './pages/Dashbord';
-import Logout from './pages/Logout';
+import PostDetail from './pages/PostDetail.jsx';
+import Register from './pages/Register.jsx';
+import Login from './pages/Login.jsx';
+import UserProfile from "./pages/UserProfile.jsx";
+import Authors from './pages/Authors.jsx';
+import CreatePost from './pages/CreatePost.jsx';
+import EditPost from './pages/EditPost.jsx';
+import CategoryPosts from './pages/CategoryPosts.jsx';
+import AuthorPost from './pages/AuthorPost.jsx';
+import Dashbord from './pages/Dashbord.jsx';
+import Logout from './pages/Logout.jsx';
 
-import PrivateRoute from './components/PrivateRoute';
-import PublicOnlyRoute from './components/PublicOnlyRoute';
+import PrivateRoute from './components/PrivateRoute.jsx';
+import PublicOnlyRoute from './components/PublicOnlyRoute.jsx';
+
+import AuthProvider from './context/AuthContext.jsx';
 
 const router = createBrowserRouter([
   {
@@ -30,6 +31,7 @@ const router = createBrowserRouter([
     children: [
       { index: true, element: <Home /> },
       { path: "posts/:id", element: <PostDetail /> },
+
       {
         path: "register",
         element: (
@@ -38,6 +40,7 @@ const router = createBrowserRouter([
           </PublicOnlyRoute>
         ),
       },
+
       {
         path: "login",
         element: (
@@ -46,6 +49,7 @@ const router = createBrowserRouter([
           </PublicOnlyRoute>
         ),
       },
+
       {
         path: "profile/:id",
         element: (
@@ -54,7 +58,9 @@ const router = createBrowserRouter([
           </PrivateRoute>
         ),
       },
+
       { path: "authors", element: <Authors /> },
+
       {
         path: "create",
         element: (
@@ -63,8 +69,11 @@ const router = createBrowserRouter([
           </PrivateRoute>
         ),
       },
+
       { path: "posts/categories/:category", element: <CategoryPosts /> },
+
       { path: "posts/users/:id", element: <AuthorPost /> },
+
       {
         path: "myposts/:id",
         element: (
@@ -73,6 +82,7 @@ const router = createBrowserRouter([
           </PrivateRoute>
         ),
       },
+
       {
         path: "posts/:id/edit",
         element: (
@@ -81,14 +91,18 @@ const router = createBrowserRouter([
           </PrivateRoute>
         ),
       },
+
       { path: "logout", element: <Logout /> },
     ],
   },
 ]);
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
+
 root.render(
   <React.StrictMode>
-    <RouterProvider router={router} />
+    <AuthProvider>
+      <RouterProvider router={router} />
+    </AuthProvider>
   </React.StrictMode>
 );

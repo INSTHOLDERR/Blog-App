@@ -1,53 +1,101 @@
 import React, { useState, useEffect } from 'react';
+
 import PostItem from '../components/Postitem';
+import "../csss/authorpost.css"
 import axios from 'axios';
-import { toast } from 'react-toastify';
+
+import { toast, ToastContainer } from 'react-toastify';
+
 import 'react-toastify/dist/ReactToastify.css';
+
 import { useParams } from 'react-router-dom';
 
 const AuthorPosts = () => {
+
   const [posts, setPosts] = useState([]);
   const [loading, setLoading] = useState(true);
-  const { _id } = useParams(); 
 
+  const { id } = useParams();
+
+  // FETCH POSTS
   useEffect(() => {
+
     const fetchUserPosts = async () => {
+
       try {
-        console.log("id", _id);
-        const response = await axios.get(`http://localhost:5000/api/posts/users/${_id}`);
-        console.log(response);
+
+        const response = await axios.get(
+          `http://localhost:5000/api/posts/users/${id}`
+        );
+
         setPosts(response.data);
+        console.log(posts);
+        
+
       } catch (error) {
-        toast.error('Error fetching user posts.', {
-          position: "top-right",
-          autoClose: 3000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-        });
+
+        toast.error('Error fetching user posts.');
+
       } finally {
+
         setLoading(false);
+
       }
+
     };
 
     fetchUserPosts();
-  }, [_id]);
 
-  const baseURL = 'http://localhost:5000/uploads/'; 
+  }, [id]);
+
+  const baseURL =
+    'http://localhost:5000/uploads/';
 
   return (
-    <div>
-      <section className="posts">
-        {loading ? (
-          <h2 className="center">Loading...</h2>
-        ) : posts.length > 0 ? (
-          <div className="container posts__container">
-            {posts.map(({ _id, thumbnail, category, title, description, creator }) => {
-              const fullThumbnailURL = `${baseURL}${thumbnail}`;
-              console.log("creator", creator);
+
+    <section className="author-posts-page">
+
+      <ToastContainer />
+
+      {/* HEADER */}
+      <div className="author-posts-header">
+
+        <h1>Author Posts ✍️</h1>
+
+        <p>
+          Explore all posts shared by this author.
+        </p>
+
+      </div>
+
+      {/* LOADING */}
+      {loading ? (
+
+        <div className="loading-posts">
+
+          <h2>Loading Posts...</h2>
+
+        </div>
+
+      ) : posts.length > 0 ? (
+
+        <div className="container posts__container">
+
+          {posts.map(
+            ({
+              _id,
+              thumbnail,
+              category,
+              title,
+              description,
+              creator,
+            }) => {
+
+              const fullThumbnailURL =
+                `${baseURL}${thumbnail}`;
 
               return (
+
                 <PostItem
                   key={_id}
                   postID={_id}
@@ -57,15 +105,32 @@ const AuthorPosts = () => {
                   description={description}
                   authorID={creator}
                 />
+
               );
-            })}
-          </div>
-        ) : (
-          <h2 className="center">No Post available</h2>
-        )}
-      </section>
-    </div>
+
+            }
+          )}
+
+        </div>
+
+      ) : (
+
+        <div className="empty-posts">
+
+          <h2>No Posts Available 😔</h2>
+
+          <p>
+            This author has not shared any posts yet.
+          </p>
+
+        </div>
+
+      )}
+
+    </section>
+
   );
+
 };
 
 export default AuthorPosts;

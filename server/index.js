@@ -9,6 +9,8 @@ import userRoutes from './routes/userRoutes.js';
 import postRoutes from './routes/postRoutes.js';
 import { notFound, errorHandler } from './middleware/errorMiddleware.js';
 import upload from 'express-fileupload';
+import dns from "dns";
+dns.setServers(["1.1.1.1", "8.8.8.8"]);
 
 dotenv.config();
 
@@ -22,7 +24,13 @@ const __dirname = path.dirname(__filename);
 app.use(express.json({ extended: true }));
 app.use(express.urlencoded({ extended: true }));
 app.use(cors({ credentials: true, origin: "http://localhost:3000" }));
-app.use(upload());
+app.use(
+  upload({
+    limits: { fileSize: 5 * 1024 * 1024 }, // 5 MB
+    abortOnLimit: true,
+    responseOnLimit: 'File size exceeds 5 MB limit',
+  })
+);
 
 app.use('/uploads', express.static(path.join(__dirname, '/uploads')));
 

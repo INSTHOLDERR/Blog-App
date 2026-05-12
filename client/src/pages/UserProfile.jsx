@@ -5,6 +5,7 @@ import { FaEdit } from "react-icons/fa";
 import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import "../csss/profile.css"
 
 const UserProfile = () => {
   const [avatar, setAvatar] = useState("");
@@ -97,9 +98,11 @@ const UserProfile = () => {
       <ToastContainer />
       <section className="profile">
         <div className="container profile__container">
-          <Link to={`/myposts/${userId}`} className="btn">
-            My posts
-          </Link>
+         <div className="profile__top">
+  <Link to={`/myposts/${userId}`} className="btn">
+    My Posts
+  </Link>
+</div>
 
           <div className="profile__details">
             <div className="avatar__wrapper">
