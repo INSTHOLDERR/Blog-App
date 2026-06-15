@@ -1,0 +1,220 @@
+/* posts.css */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Poppins", sans-serif;
+  background: #f5f7fb;
+}
+
+/* SECTION */
+
+.posts-section {
+  width: 100%;
+  padding: 1rem 5%;
+}
+
+/* HEADER */
+
+.posts-header {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.posts-header h1 {
+  font-size: 3rem;
+  color: #111827;
+  margin-bottom: 10px;
+}
+
+.posts-header p {
+  color: #6b7280;
+  font-size: 1rem;
+}
+
+/* POSTS GRID */
+/* 4 POSTS IN ONE ROW */
+
+.posts-container {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.5rem;
+}
+
+/* CARD */
+
+.post-card {
+  background: #fff;
+  border-radius: 18px;
+  overflow: hidden;
+  transition: 0.4s ease;
+  box-shadow: 0 5px 18px rgba(0, 0, 0, 0.06);
+  display: flex;
+  flex-direction: column;
+}
+
+.post-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 12px 25px rgba(0, 0, 0, 0.12);
+}
+
+/* IMAGE */
+
+.thumbnail-wrapper {
+  width: 100%;
+  height: 220px;
+  overflow: hidden;
+  display: block;
+}
+
+.post-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: 0.5s;
+}
+
+.post-card:hover .post-image {
+  transform: scale(1.08);
+}
+
+/* CONTENT */
+
+.post-content {
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+/* CATEGORY */
+
+.category-tag {
+  width: fit-content;
+  background: linear-gradient(135deg, #6366f1, #8b5cf6);
+  color: white;
+  padding: 6px 14px;
+  border-radius: 30px;
+  font-size: 0.75rem;
+  margin-bottom: 1rem;
+}
+
+/* TITLE */
+
+.post-title-link {
+  text-decoration: none;
+}
+
+.post-title-link h2 {
+  color: #111827;
+  font-size: 1.1rem;
+  line-height: 1.5;
+  margin-bottom: 0.8rem;
+  transition: 0.3s;
+}
+
+.post-title-link:hover h2 {
+  color: #6366f1;
+}
+
+/* DESCRIPTION */
+
+.post-description {
+  color: #6b7280;
+  font-size: 0.9rem;
+  line-height: 1.7;
+  margin-bottom: 1.5rem;
+  flex: 1;
+}
+
+/* FOOTER */
+
+.post-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: auto;
+}
+
+/* BUTTON */
+
+.read-more-btn {
+  text-decoration: none;
+  background: #111827;
+  color: white;
+  padding: 8px 16px;
+  border-radius: 10px;
+  font-size: 0.85rem;
+  transition: 0.3s;
+}
+
+.read-more-btn:hover {
+  background: #6366f1;
+}
+
+/* EMPTY */
+
+.empty-posts {
+  text-align: center;
+  padding: 4rem;
+  color: #6b7280;
+}
+
+/* ================= RESPONSIVE ================= */
+
+/* LAPTOP */
+
+@media screen and (max-width: 1200px) {
+  .posts-container {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+/* TABLET */
+
+@media screen and (max-width: 900px) {
+  .posts-container {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .posts-header h1 {
+    font-size: 2.4rem;
+  }
+}
+
+/* MOBILE */
+
+@media screen and (max-width: 600px) {
+  .posts-section {
+    padding: 3rem 4%;
+  }
+
+  .posts-container {
+    grid-template-columns: 1fr;
+  }
+
+  .posts-header h1 {
+    font-size: 2rem;
+  }
+
+  .thumbnail-wrapper {
+    height: 200px;
+  }
+
+  .post-title-link h2 {
+    font-size: 1rem;
+  }
+
+  .post-description {
+    font-size: 0.85rem;
+  }
+
+  .read-more-btn {
+    padding: 7px 14px;
+    font-size: 0.8rem;
+  }
+}

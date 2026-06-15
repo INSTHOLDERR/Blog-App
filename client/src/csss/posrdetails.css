@@ -1,0 +1,228 @@
+/* ================= POST DETAIL ================= */
+
+.post-detail-page {
+
+  width: 100%;
+
+  padding: 2rem 1rem;
+}
+
+/* CONTAINER */
+
+.post-detail-container {
+
+  width: 100%;
+  max-width: 900px;
+
+  margin: auto;
+
+  background: white;
+
+  border-radius: 18px;
+
+  padding: 2rem;
+
+  box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+}
+
+/* HEADER */
+
+.post-detail-header {
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 1rem;
+
+  margin-bottom: 2rem;
+}
+
+/* ACTIONS */
+
+.post-actions {
+
+  display: flex;
+
+  gap: 1rem;
+}
+
+/* BUTTONS */
+
+.edit-btn,
+.delete-btn {
+
+  padding: 0.7rem 1.2rem;
+
+  border: none;
+
+  border-radius: 10px;
+
+  font-size: 0.9rem;
+
+  cursor: pointer;
+
+  transition: 0.3s ease;
+}
+
+/* EDIT */
+
+.edit-btn {
+
+  background: #4f46e5;
+
+  color: white;
+}
+
+.edit-btn:hover {
+
+  background: #4338ca;
+}
+
+/* DELETE */
+
+.delete-btn {
+
+  background: #fee2e2;
+
+  color: #dc2626;
+}
+
+.delete-btn:hover {
+
+  background: #fecaca;
+}
+
+/* TITLE */
+
+.post-title {
+
+  font-size: 2rem;
+
+  line-height: 1.4;
+
+  color: #111827;
+
+  margin-bottom: 2rem;
+}
+
+/* IMAGE */
+
+.post-thumbnail {
+
+  width: 100%;
+
+  border-radius: 16px;
+
+  overflow: hidden;
+
+  margin-bottom: 2rem;
+}
+
+.post-thumbnail img {
+
+  width: 100%;
+
+  max-height: 500px;
+
+  object-fit: cover;
+}
+
+/* DESCRIPTION */
+
+.post-description {
+
+  color: #374151;
+
+  line-height: 1.9;
+
+  font-size: 1rem;
+}
+
+.post-description p {
+
+  margin-bottom: 1rem;
+}
+
+.post-description img {
+
+  width: 100%;
+
+  border-radius: 14px;
+
+  margin: 1rem 0;
+}
+
+/* ERROR */
+
+.form__error-message {
+
+  max-width: 500px;
+
+  margin: auto;
+
+  background: #fee2e2;
+
+  color: #dc2626;
+
+  padding: 1rem;
+
+  border-radius: 10px;
+
+  text-align: center;
+}
+
+/* RESPONSIVE */
+
+@media screen and (max-width: 768px) {
+
+  .post-detail-container {
+
+    padding: 1.5rem;
+  }
+
+  .post-title {
+
+    font-size: 1.7rem;
+  }
+
+}
+
+@media screen and (max-width: 500px) {
+
+  .post-detail-page {
+
+    padding: 1.5rem 0.7rem;
+  }
+
+  .post-detail-container {
+
+    padding: 1rem;
+  }
+
+  .post-detail-header {
+
+    flex-direction: column;
+
+    align-items: flex-start;
+  }
+
+  .post-actions {
+
+    width: 100%;
+  }
+
+  .edit-btn,
+  .delete-btn {
+
+    flex: 1;
+
+    text-align: center;
+  }
+
+  .post-title {
+
+    font-size: 1.5rem;
+  }
+
+}

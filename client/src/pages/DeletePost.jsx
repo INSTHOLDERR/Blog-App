@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import { useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
@@ -13,3 +14,16 @@ const DeletePost = () => {
   return null;
 };
 export default DeletePost;
+=======
+import React from 'react'
+
+const DeletePost = () => {
+  return (
+    <div>
+      DeletePost
+    </div>
+  )
+}
+
+export default DeletePost
+>>>>>>> d622943dd43b7c5375060cca52dbebba4f67b2e6

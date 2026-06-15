@@ -1,0 +1,209 @@
+/* ================= EDIT POST ================= */
+
+.edit-post-page {
+
+  width: 100%;
+
+  padding: 2rem 1rem;
+}
+
+/* CONTAINER */
+
+.edit-post-container {
+
+  width: 100%;
+  max-width: 900px;
+
+  margin: auto;
+
+  background: white;
+
+  border-radius: 18px;
+
+  padding: 2rem;
+
+  box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+}
+
+/* HEADER */
+
+.edit-post-header {
+
+  text-align: center;
+
+  margin-bottom: 2rem;
+}
+
+.edit-post-header h1 {
+
+  font-size: 2rem;
+
+  color: #111827;
+
+  margin-bottom: 0.5rem;
+}
+
+.edit-post-header p {
+
+  color: #6b7280;
+
+  font-size: 0.95rem;
+}
+
+/* FORM */
+
+.edit-post-form {
+
+  display: flex;
+  flex-direction: column;
+
+  gap: 1.5rem;
+}
+
+/* INPUT GROUP */
+
+.input-group {
+
+  display: flex;
+  flex-direction: column;
+
+  gap: 0.5rem;
+}
+
+.input-group label {
+
+  font-size: 0.9rem;
+
+  font-weight: 500;
+
+  color: #374151;
+}
+
+/* INPUTS */
+
+.edit-post-form input,
+.edit-post-form select {
+
+  width: 100%;
+
+  padding: 1rem;
+
+  border: 1px solid #dbe1ef;
+
+  border-radius: 12px;
+
+  font-size: 1rem;
+}
+
+/* FOCUS */
+
+.edit-post-form input:focus,
+.edit-post-form select:focus {
+
+  outline: none;
+
+  border-color: #4f46e5;
+}
+
+/* FILE */
+
+.file-input {
+
+  background: #f9fafb;
+
+  cursor: pointer;
+}
+
+/* QUILL */
+
+.quill-editor {
+
+  border-radius: 12px;
+
+  overflow: hidden;
+}
+
+.ql-toolbar {
+
+  border-radius: 12px 12px 0 0;
+}
+
+.ql-container {
+
+  min-height: 220px;
+
+  border-radius: 0 0 12px 12px;
+}
+
+/* BUTTON */
+
+.update-post-btn {
+
+  width: 100%;
+
+  padding: 1rem;
+
+  border: none;
+
+  border-radius: 12px;
+
+  background: #4f46e5;
+
+  color: white;
+
+  font-size: 1rem;
+
+  cursor: pointer;
+
+  transition: 0.3s;
+}
+
+.update-post-btn:hover {
+
+  background: #4338ca;
+}
+
+/* ERROR */
+
+.form__error-message {
+
+  background: #fee2e2;
+
+  color: #dc2626;
+
+  padding: 0.9rem;
+
+  border-radius: 10px;
+
+  margin-bottom: 1rem;
+}
+
+/* RESPONSIVE */
+
+@media screen and (max-width: 768px) {
+
+  .edit-post-container {
+
+    padding: 1.5rem;
+  }
+
+}
+
+@media screen and (max-width: 500px) {
+
+  .edit-post-page {
+
+    padding: 1.5rem 0.7rem;
+  }
+
+  .edit-post-container {
+
+    padding: 1rem;
+  }
+
+  .edit-post-header h1 {
+
+    font-size: 1.7rem;
+  }
+
+}
