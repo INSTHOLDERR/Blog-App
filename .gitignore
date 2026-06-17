@@ -1,13 +1,12 @@
-<<<<<<< HEAD
-node_modules/
-server/uploads/
-*.env
-=======
 # dependencies
-node_modules
+node_modules/
+
+# uploaded files
+server/uploads/
 
 # env files
 .env
+*.env
 
 # build files
 dist
@@ -21,4 +20,3 @@ yarn-error.log*
 # OS files
 .DS_Store
 Thumbs.db
->>>>>>> d622943dd43b7c5375060cca52dbebba4f67b2e6

@@ -1,29 +1,17 @@
-<<<<<<< HEAD
-import { useEffect } from 'react';
+import { useEffect, useContext } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import { AuthContext } from '../context/AuthContext.jsx';
 
 const DeletePost = () => {
   const { id } = useParams();
   const navigate = useNavigate();
+  const { currentUser } = useContext(AuthContext);
   useEffect(() => {
     axios.delete(`http://localhost:5000/api/posts/${id}`, {
-      headers: { Authorization: `Bearer ${localStorage.getItem('token')}` }
+      headers: { Authorization: `Bearer ${currentUser?.token}` }
     }).finally(() => navigate('/'));
-  }, [id, navigate]);
+  }, [id, navigate, currentUser]);
   return null;
 };
 export default DeletePost;
-=======
-import React from 'react'
-
-const DeletePost = () => {
-  return (
-    <div>
-      DeletePost
-    </div>
-  )
-}
-
-export default DeletePost
->>>>>>> d622943dd43b7c5375060cca52dbebba4f67b2e6

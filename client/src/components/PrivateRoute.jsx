@@ -1,19 +1,10 @@
-<<<<<<< HEAD
-import React from 'react';
+import React, { useContext } from 'react';
 import { Navigate } from 'react-router-dom';
-const PrivateRoute = ({ children }) => {
-  const token = localStorage.getItem('token');
-  return token ? children : <Navigate to="/login" />;
-};
-=======
-
-import React from 'react';
-import { Navigate } from 'react-router-dom';
+import { AuthContext } from '../context/AuthContext.jsx';
 
 const PrivateRoute = ({ children }) => {
-  const userId = localStorage.getItem("userId");
-  return userId ? children : <Navigate to="/login" replace />;
+  const { currentUser } = useContext(AuthContext);
+  return currentUser ? children : <Navigate to="/login" replace />;
 };
 
->>>>>>> d622943dd43b7c5375060cca52dbebba4f67b2e6
 export default PrivateRoute;

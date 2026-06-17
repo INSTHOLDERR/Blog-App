@@ -1,29 +1,14 @@
-<<<<<<< HEAD
-import { useEffect } from 'react';
+import { useEffect, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { AuthContext } from '../context/AuthContext.jsx';
 
 const Logout = () => {
   const navigate = useNavigate();
+  const { logout } = useContext(AuthContext);
   useEffect(() => {
-    localStorage.removeItem('token');
-    localStorage.removeItem('userId');
-    localStorage.removeItem('tokenExpiration');
-    window.dispatchEvent(new Event('storage'));
+    logout();
     navigate('/');
-  }, [navigate]);
+  }, [navigate, logout]);
   return null;
 };
 export default Logout;
-=======
-import React from 'react'
-
-const Logout = () => {
-  return (
-    <div>
-      Logout
-    </div>
-  )
-}
-
-export default Logout
->>>>>>> d622943dd43b7c5375060cca52dbebba4f67b2e6

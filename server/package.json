@@ -5,11 +5,8 @@
   "type": "module",
   "scripts": {
     "dev": "nodemon index.js",
-<<<<<<< HEAD
-    "start": "node index.js"
-=======
+    "start": "cross-env NODE_ENV=production node index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
->>>>>>> d622943dd43b7c5375060cca52dbebba4f67b2e6
   },
   "keywords": [],
   "author": "",
@@ -18,6 +15,7 @@
   "dependencies": {
     "bcryptjs": "^2.4.3",
     "cors": "^2.8.5",
+    "cross-env": "^7.0.3",
     "dotenv": "^16.4.5",
     "express": "^4.19.2",
     "express-fileupload": "^1.5.0",
